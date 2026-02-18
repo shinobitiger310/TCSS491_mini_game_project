@@ -62,6 +62,15 @@ class HUD {
         if (this.game.gameOver) {
             this._drawCenterMessage(ctx, "Game Over", "Returning to main menu...");
         }
+
+        // --- Guide text (bottom-left) ---
+        ctx.save();
+        ctx.fillStyle    = "green";
+        ctx.font         = "18px Arial";
+        ctx.textAlign    = "left";
+        ctx.textBaseline = "bottom";
+        ctx.fillText("Move mouse to aim  |  SPACE or Click to fire  |  M - Game Menu", 10, ctx.canvas.height - 10);
+        ctx.restore();
     }
 
     _drawCenterMessage(ctx, title, subtitle) {

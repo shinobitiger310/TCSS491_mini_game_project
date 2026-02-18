@@ -73,13 +73,5 @@ class Crossbow {
         ctx.drawImage(this.image, -this.width / 2, -this.height / 2, this.width, this.height);
         ctx.restore();
 
-        // Guide text at bottom center
-        ctx.save();
-        ctx.fillStyle    = "green";
-        ctx.font         = "18px Arial";
-        ctx.textAlign    = "left";
-        ctx.textBaseline = "bottom";
-        ctx.fillText("Move mouse to aim  |  SPACE or Click to fire", 10, ctx.canvas.height - 10);
-        ctx.restore();
     }
 }
