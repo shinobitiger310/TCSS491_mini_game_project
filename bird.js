@@ -24,11 +24,12 @@ class Bird {
         this.scale = 0.15;
         this.scaledWidth = this.frameWidth * this.scale;
 
-        // Random Y position (keep fully below top edge)
-        this.y = 20 + Math.random() * 280;
+        // Random Y position (keep in upper half of canvas)
+        this.y = 20 + Math.random() * (this.game.canvas.height * 0.4);
 
-        // Random speed
-        this.speed = 100 + Math.random() * 100;
+        // Speed from level config
+        const config = this.game.levels[this.game.currentLevel];
+        this.speed = config.minSpeed + Math.random() * (config.maxSpeed - config.minSpeed);
 
         // Start from left, move right
         this.x = -this.scaledWidth - Math.random() * 500;
@@ -37,10 +38,11 @@ class Bird {
     update() {
         this.x += this.speed * this.game.clockTick;
 
-        // Reset to left when off right edge
-        if (this.x > 1024) {
+        // Reset to left when off right edge — costs the player 1 HP
+        if (this.x > this.game.ctx.canvas.width) {
+            if (this.game.playerHP > 0) this.game.playerHP--;
             this.x = -this.scaledWidth;
-            this.y = 20 + Math.random() * 280;
+            this.y = 20 + Math.random() * (this.game.ctx.canvas.height * 0.4);
         }
     }
 
